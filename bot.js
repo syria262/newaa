@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const prefix = "-"
 
 client.on('message', message => {   
-     if (message.content === "ping") {
+     if (message.content === "-ping") {
       const embed = new Discord.RichEmbed()
  
   .setColor("RANDOM")
