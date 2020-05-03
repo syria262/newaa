@@ -2,164 +2,114 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-"
 
+const discord = require("discord.js");
+
+module.exports.run = async (bot, message, args) => {
+
+    // Argumenten die we later nodig hebben.
+    var item = "";
+    var time;
+    var winnerCount;
+
+    // Nakijken als je perms hebt om dit command te doen.
+    if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Sorry jij kan dit niet doen");
+
+    // !giveaway aantalWinnaars seconden itemOmTeWinnen.
+
+    // Aantal winnaars opvragen.
+    winnerCount = args[0];
+    // Tijd hoelang het moet duren.
+    time = args[1];
+    // Welke prijs men kan winnen.
+    item = args.splice(2, args.length).join(' ');
+
+    // Verwijder het bericht dat net is gemaakt door de gebruiker.
+    message.delete();
+
+    // Verval datum berekenen.
+    var date = new Date().getTime();
+    var dateTime = new Date(date + (time * 1000));
+
+    // Maak embed aan.
+    var giveawayEmbed = new discord.RichEmbed()
+        .setTitle("🎉 **GIVEAWAY** 🎉")
+        .setFooter(`Vervalt: ${dateTime}`)
+        .setDescription(item);
+
+    // Verzend embed en zet de reactie op de popper.
+    var embedSend = await message.channel.send(giveawayEmbed);
+    embedSend.react("🎉");
+
+    // Zet een timeout die na het aantal seconden af gaat.
+    setTimeout(function () {
+
+        // Argumenten die we nodig hebben.
+        var random = 0;
+        var winners = [];
+        var inList = false;
+
+        // Verkrijg de gebruikers die gereageerd hebben op de giveaway.
+        var peopleReacted = embedSend.reactions.get("🎉").users.array();
+
+        // Hier gaan we al de mensen over gaan en kijken als de bot er tussen staan
+        // De bot moeten we uit de lijst weghalen en dan gaan we verder.
+        for (var i = 0; i < peopleReacted.length; i++) {
+            if (peopleReacted[i].id == bot.user.id) {
+                peopleReacted.splice(i, 1);
+                continue;
+            }
+        }
+
+        // Hier kijken we na als er wel iemand heeft meegedaan.
+        if (peopleReacted.length == 0) {
+            return message.channel.send("Niemand heeft gewonnen dus de bot wint.");
+        }
+
+        // Tijdelijk kijken we na als er te wienig mensen hebben mee gedaan aan de wedstrijd.
+        if (peopleReacted.length < winnerCount) {
+            return message.channel.send("Er zijn te weinig mensen die mee deden daarom heeft de bot gewonnen.");
+        }
+
+        // Voor het aantal winnaars dat we eerder hebben opgegeven gaan we een random nummer aanmaken en de user in een array zetten. 
+        for (var i = 0; i < winnerCount; i++) {
+
+            inList = false;
+
+            // Aanmaken van een random getal zodat we een user kunnen kiezen.
+            random = Math.floor(Math.random() * peopleReacted.length);
+
+            // Als een winnaar al voorkomt in de winnaars lijst dan moeten we opnieuw gaan zoeken naar een andere winnaar.
+            for (var y = 0; y < winners.length; y++) {
+                // Nakijken als de geslecteerde winnaar al in de lijst zit.
+                if (winners[y] == peopleReacted[random]) {
+                    // We zetten i 1 minder zodat we opnieuw kunnen doorgaan in de lijst.
+                    i--;
+                    // We zetten dit op true zodat we weten dat deze al in de lijst zit.
+                    inList = true;
+                    break;
+                }
+            }
+
+            // Zit deze niet in de lijst gaan we deze toevoegen.
+            if (!inList) {
+                winners.push(peopleReacted[random]);
+            }
+
+        }
+
+        // Voor iedere winnaar gaan we een bericht sturen.
+        for (var i = 0; i < winners.length; i++) {
+            message.channel.send("Proficiat " + winners[i] + `! Je hebt gewonnen **${item}**.`);
+        }
+
+    }, 1000 * time);
 
 
-client.on("message", async message => {
-  var time = moment().format("Do MMMM YYYY , hh:mm");
-  var room;
-  var title;
-  var duration;
-  var gMembers;
-  var currentTime = new Date(), //Narox
-    hours = currentTime.getHours() + 3,
-    minutes = currentTime.getMinutes(),
-    done = currentTime.getMinutes() + duration / 60000,
-    seconds = currentTime.getSeconds();
-  if (minutes < 10) {
-    minutes = "0" + minutes;
-  }
-  var suffix = "AM"; //Narox
-  if (hours >= 12) {
-    suffix = "PM";
-    hours = hours - 12;
-  }
-  if (hours == 0) {
-    hours = 12; 
-  }
-client.on("message", async message => {
-  var filter = m => m.author.id === message.author.id; //Narox
-  if (message.content.startsWith(prefix + "giveaway")) {
-    if (!message.guild.member(message.author).hasPermission("MANAGE_GUILD"))
-      return message.channel.send(
-        ":heavy_multiplication_x:| **يجب أن يكون لديك خاصية التعديل على السيرفر**"
-      );
-    message.channel
-      .send(
-        `:eight_pointed_black_star:| **Send Name channel For the Giveaway**`
-      )
-      .then(msg => {
-        message.channel
-          .awaitMessages(filter, {
-            //Narox
-            max: 1, //Narox
-            time: 20000,
-            errors: ["time"]
-          })
-          .then(collected => {
-            //Narox
-            let room = message.guild.channels.find(
-              "name",
-              collected.first().content
-            ); //Narox
-            if (!room)
-              return message.channel.send(
-                ":heavy_multiplication_x:| **i Found It :(**"
-              ); //Narox
-            room = collected.first().content;
-            collected.first().delete(); //Narox
-            msg
-              .edit(":eight_pointed_black_star:| **Time For The Giveaway**")
-              .then(msg => {
-                message.channel
-                  .awaitMessages(filter, {
-                    max: 1,
-                    time: 20000, //Narox
-                    errors: ["time"]
-                  })
-                  .then(collected => {
-                    //Narox
-                    if (isNaN(collected.first().content))
-                      return message.channel.send(
-                        ":heavy_multiplication_x:| **The Time Be Nambers `` Do the Commend Agin``**"
-                      );
-                    duration = collected.first().content * 60000;
-                    collected.first().delete(); //Narox
-                    msg
-                      .edit(
-                        ":eight_pointed_black_star:| **Now send The Present **"
-                      )
-                      .then(msg => {
-                        message.channel
-                          .awaitMessages(filter, {
-                            max: 1,
-                            time: 20000, //Narox
-                            errors: ["time"]
-                          })
-                          .then(collected => {
-                            //Narox
-                            title = collected.first().content;
-                            collected.first().delete();
-                            msg.delete();
-                            message.delete();
-                            try {
-                              let giveEmbed = new Discord.RichEmbed()
-                                .setDescription(
-                                  `**${title}** \nReact With 🎉 To Enter! \nTime remaining : ${duration /
-                                    60000} **Minutes**\n **Created at :** ${hours}:${minutes}:${seconds} ${suffix}`
-                                )
-                                .setFooter(
-                                  message.author.username,
-                                  message.author.avatarURL
-                                );
-                              message.guild.channels
-                                .find("name", room)
-                                .send(
-                                  " :heavy_check_mark: **Giveaway Created** :heavy_check_mark:",
-                                  { embed: giveEmbed }
-                                )
-                                .then(m => {
-                                  let re = m.react("🎉"); //Narox
-                                  setTimeout(() => {
-                                    let users = m.reactions.get("🎉").users; //Narox
-                                    let list = users
-                                      .array()
-                                      .filter(
-                                        u =>
-                                          (u.id !== m.author.id) !==
-                                          client.user.id
-                                      ); //Narox
-                                    let gFilter =
-                                      list[
-                                        Math.floor(
-                                          Math.random() * list.length
-                                        ) + 0
-                                      ];
-                                    let endEmbed = new Discord.RichEmbed() //Narox
-                                      .setAuthor(
-                                        message.author.username,
-                                        message.author.avatarURL
-                                      )
-                                      .setTitle(title) //Narox
-                                      .addField(
-                                        "Giveaway Ended !🎉",
-                                        `Winners : ${gFilter} \nEnded at :`
-                                      )
-                                      .setTimestamp();
-                                    m.edit("** 🎉 GIVEAWAY ENDED 🎉**", {
-                                      embed: endEmbed
-                                    });
-                                    message.guild.channels
-                                      .find("name", room)
-                                      .send(
-                                        `**Congratulations ${gFilter}! You won The \`${title}\`**`,
-                                        { embed: {} }
-                                      );
-                                  }, duration); //Narox
-                                });
-                            } catch (e) {
-                              //Narox
-                              message.channel.send(
-                                `:heavy_multiplication_x:| **i Don't Have Prem**`
-                              );
-                              console.log(e); //Narox
-                            }
-                          });
-                      });
-                  });
-              });
-          });
-      });
-  }
-});
+}
+
+module.exports.help = {
+    name: "giveaway",
+    description: "Start een giveaway"
+}
 
 client.login(process.env.BOT_TOKEN);
