@@ -2,6 +2,34 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-"
 
+client.on('message', msg => {
+  if (msg.content === '*public') {
+    msg.reply(':envelope: | تم ارسال الاوامر العامة في الخاص');
+  }
+});
+   
+   
+
+client.on('message', msg => {
+  if (msg.content === '*admin') {
+    msg.reply(':envelope: | تم ارسال اوامر الادمنية في الخاص');
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === '*games') {
+    msg.reply(':envelope: | تم ارسال اوامر الالعاب في الخاص');
+  }
+});
+
+
+
+client.on('message', msg => {
+  if (msg.content === '*music') {
+    msg.reply(':envelope: | تم ارسال اوامر الموسيقى في الخاص');
+  }
+});
+
 
 client.on('message', msg => {   if (msg.content === '.') {     msg.reply('وعليكم السلام');} });
 
