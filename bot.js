@@ -2,84 +2,101 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-"
 
-client.on("message", message => {
-    var prefix = "#";
-            var args = message.content.substring(prefix.length).split(" ");
-            if (message.content.startsWith(prefix + "clear")) {
- if (!args[1]) {
-                                let x5bz1 = new Discord.RichEmbed()
-                                .setDescription("#clear <number>")
-                                .setColor("#0000FF")
-                                message.channel.sendEmbed(x5bz1);
-                            } else {
-                            let messagecount = parseInt(args[1]);
-                            message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
-                                                          message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
-                            message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
-                            let x5bz2 = new Discord.RichEmbed()
-                                                            .setColor("#008000")
-                                .setDescription(":white_check_mark: | Delete " + args[1] + " Message!")
-                                                                                        message.delete("..");
-                                message.channel.sendEmbed(x5bz2);
-                            }
-                          }
-});
-
-
-var stopReacord = true;
-var reactionRoles = [];
-var definedReactionRole = null;
-
-client.on("message", async message => {
-    const args = message.content.slice(prefix.length).trim().split(/ +/g);
-    const command = args.shift().toLowerCase();
-    if(message.author.bot) return;
-    if(message.content.indexOf(prefix) !== 0) return;
-    if (command == "autoc") {
-      if(!message.channel.guild) return message.reply(`**this ~~command~~ __for servers only__**`);
-      if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("sorry you can't do this");
-      if(!args[0] || args[1]) return message.channel.send(`\`\`\`${prefix}autoC <role-name>\`\`\``);
-      var role = message.guild.roles.find( role => { return role.name == args[0] });
-      if(!role) return message.channel.send(`no role with name ${definedRoleName} found, make sure you entered correct name`);
-      if(definedReactionRole != null  || !stopReacord) return message.channel.send("another reaction role request is running");
-      message.channel.send(`now go and add reaction in the message you want for role ${role.name}`);
-      definedReactionRole = role;
-      stopReacord = false;
-    }     
-})
-client.on('raw', raw => {
-  if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(raw.t)) return;
-  var channel = client.channels.get(raw.d.channel_id);
-  if (channel.messages.has(raw.d.message_id)) return;
-  channel.fetchMessage(raw.d.message_id).then(message => {
-    var reaction = message.reactions.get( (raw.d.emoji.id ? `${raw.d.emoji.name}:${raw.d.emoji.id}` : raw.d.emoji.name) );
-    if (raw.t === 'MESSAGE_REACTION_ADD') return client.emit('messageReactionAdd', reaction, client.users.get(raw.d.user_id));
-    if (raw.t === 'MESSAGE_REACTION_REMOVE') return client.emit('messageReactionRemove', reaction, client.users.get(raw.d.user_id));
-  });
-});
-client.on('messageReactionAdd', (reaction, user) => {
-    if(user.id == client.user.id) return;
-    if(!stopReacord) {
-      var done = false;
-      reactionRoles[reaction.message.id] = { role: definedReactionRole, message_id: reaction.message.id, emoji: reaction.emoji};
-      stopReacord =  true;
-      definedReactionRole = null;
-      reaction.message.react(reaction.emoji.name)
-      .catch(err => {done = true; reaction.message.channel.send(`sorry i can't use this emoji but the reaction role done! anyone react will get the role!`)})
-      if(done) reaction.remove(user); 
-    } else {
-      var request = reactionRoles[reaction.message.id];
-      if(!request) return;
-      if(request.emoji.name != reaction.emoji.name) return reaction.remove(user);
-      reaction.message.guild.members.get(user.id).addRole(request.role);
+client.on('message', message => {
+if (message.content.startsWith(prefix + 'help')) { 
+    let pages = [`
+***__وصف عن البوت__***
+**
+:gem:  البوت فيه كثير ميزات حلوة و جميلة
+ ا:rocket: البوت يعمل قرابة 24 ساعة
+**
+        ***__General orders__***
+**
+『?serv /يعرض لك معلومات عن السيرفر』
+『?serv2 / يعرض لك معلومات عن السيرفر ( الكود الثاني ) للمعلومات』
+『?id / يعرض لك معلومات عنك』
+『?myroles / لرؤية جميع رتبك الشخصية بالسيرفر』
+『?id / يعرض لك معلومات عنك』
+『?link / لمعمل انفايت ( دعوة ) لشخص』
+『?inv / لدعوة البوت الى سيرفرك』
+『?support / سيرفر المساعدة』
+『?cmind / لكتابة اي شيء تقوله داخل صورة』
+『?servavatar / لرؤية صورة السيرفر』
+『?count / لرؤية عدد الاعضاء بالسيرفر』
+『?avatar / لرؤية صورة شخص 』
+『?bot-info / لرؤية معلومات عن البوت 』
+『?report / لرفع شكوى على عضو 』
+『?servers / لرؤية عدد السيرفرات التي داخل بها البوت 』
+『?myid / لمعرفة الايدي الخاص بك 』
+**
+  `
+,`
+        ***__Admin orders__***
+**
+『?clear / لحذف الشات 』
+『?mc / لقفل الشات  』
+『?unmc / لفتح الشات 』
+『?bc / لارسال رسالة لجميع اعضاء السيرفر 』
+『?kick / لطرد شخص من الدسكورد 』
+『?ban / لاعطاء شخص باند من الدسكورد 』
+『?mute / لاعطاء شخص ميوت 』
+『?unmute / لفك ميوت شخص 』
+『?ct / لانشاء روم كتابي 』
+『?cv / لانشاء روم صوتي 』
+『?rolebc / برود كاست للرتب 』
+**
+  `
+,`
+        ***__Games orders__***
+**
+『?لعبة صراحة / صراحة 』
+『?لعبة كت تويت / كت تويت 』
+『?لعبة لو خيروك / لو خيروك』
+『?rps / لعبة حجرة ورقة مقص 』
+『?اسئلة للعبة فورت نايت /  فورت نايت 』
+**
+   
+`]
+    let page = 1;
+ 
+    let embed = new Discord.RichEmbed()
+    .setColor('RANDOM')
+    .setFooter(`Page ${page} of ${pages.length}`)
+    .setDescription(pages[page-1])
+ 
+    message.author.sendEmbed(embed).then(msg => {
+ 
+        msg.react('◀').then( r => {
+            msg.react('▶')
+ 
+ 
+        const backwardsFilter = (reaction, user) => reaction.emoji.name === '◀' && user.id === message.author.id;
+        const forwardsFilter = (reaction, user) => reaction.emoji.name === '▶' && user.id === message.author.id;
+ 
+ 
+        const backwards = msg.createReactionCollector(backwardsFilter, { time: 2000000});
+        const forwards = msg.createReactionCollector(forwardsFilter, { time: 2000000});
+ 
+ 
+ 
+        backwards.on('collect', r => {
+            if (page === 1) return;
+            page--;
+            embed.setDescription(pages[page-1]);
+            embed.setFooter(`Page ${page} of ${pages.length}`);
+            msg.edit(embed)
+        })
+        forwards.on('collect', r => {
+            if (page === pages.length) return;
+     
+      page++;
+            embed.setDescription(pages[page-1]);
+            embed.setFooter(`Page ${page} of ${pages.length}`);
+            msg.edit(embed)
+        })
+        })
+    })
     }
-}) 
-client.on('messageReactionRemove', (reaction, user) => {
-  if(user.id == client.user.id) return;
-  if(!stopReacord) return;
-  let request = reactionRoles[reaction.message.id];
-  if(!request) return;
-  reaction.message.guild.members.get(user.id).removeRole(request.role);
 });
 
 client.login(process.env.BOT_TOKEN);
