@@ -3,9 +3,7 @@ const client = new Discord.Client();
 const prefix = "-"
 
 client.on('message', message => {
-  if(message.author.bot) return;
-  if(!message.content.startsWith(prefix)) return;
-  if(message.content.startsWith(prefix + "help")) {
+if (message.content.startsWith(prefix + 'help')) { 
     let embed = new Discord.RichEmbed()
     .setColor("BLACK")
     .setAuthor(client.user.tag,client.user.avatarURL)
