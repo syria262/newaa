@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-"
 
-lient.on("message", message => {
+client.on('message', message => {
   if(message.author.bot) return;
   if(!message.content.startsWith(prefix)) return;
   if(message.content.startsWith(prefix + "help")) {
