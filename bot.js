@@ -2,6 +2,30 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-"
 
+
+
+client.on("message", async message => {
+  var time = moment().format("Do MMMM YYYY , hh:mm");
+  var room;
+  var title;
+  var duration;
+  var gMembers;
+  var currentTime = new Date(), //Narox
+    hours = currentTime.getHours() + 3,
+    minutes = currentTime.getMinutes(),
+    done = currentTime.getMinutes() + duration / 60000,
+    seconds = currentTime.getSeconds();
+  if (minutes < 10) {
+    minutes = "0" + minutes;
+  }
+  var suffix = "AM"; //Narox
+  if (hours >= 12) {
+    suffix = "PM";
+    hours = hours - 12;
+  }
+  if (hours == 0) {
+    hours = 12; 
+  }
 client.on("message", async message => {
   var filter = m => m.author.id === message.author.id; //Narox
   if (message.content.startsWith(prefix + "giveaway")) {
