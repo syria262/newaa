@@ -2,21 +2,36 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-"
 
-
-client.on('message', message => {  
-    if (message.author.bot) return; 
-    if (message.content.startsWith(prefix + 'clear')) { 
-    if(!message.channel.guild) return message.reply(`** This Command For Servers Only**`); 
-     if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send(`** You don't have Premissions!**`);
-     if(!message.guild.member(client.user).hasPermission('MANAGE_GUILD')) return message.channel.send(`**I don't have Permission!**`);
-    let args = message.content.split(" ").slice(1)
-    let messagecount = parseInt(args);
-    if (args > 100) return message.reply(`** The number can't be more than **100** .**`).then(messages => messages.delete(5000))
-    if(!messagecount) args = '100';
-    message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages)).then(msgs => {
-    message.channel.send(`** Done , Deleted `${msgs.size}` messages.**`).then(messages => messages.delete(5000));
+client.on("message",async msg => {
+    if(msg.content.startsWith(prefix + "clear")){
+      let args = msg.content.split(" ").slice(1).join(" ");
+      if(!args)  return msg.reply(`**${msg.content} <Number Messages Deleted?>**`)
+      msg.reply("**Are You Sure Of The Deleted Messages?**").then(o => {
+        o.react("✅")
+        .then(()=> o.react('❎'))
+        .then(()=> o.react("✅"))
+        let reaction1 = (reaction,user) => reaction.emoji.name === "✅" && user.id === msg.author.id
+        let reaction2 = (reaction,user) => reaction.emoji.name === "❎" && user.id === msg.author.id
+        let react3 = o.createReactionCollector(reaction1, { time: 12300})
+        let react4 = o.createReactionCollector(reaction2, { time: 12300})
+        react3.on("collect", r => {
+         msg.channel.bulkDelete(args)
+          msg.reply(`**Done Deleted Messages ${args}**`).then(op => {
+          op.delete(1200)
+         o.delete(1200)
+         msg.delete(1200)
+       })
+       react4.on("collect", r => {
+        msg.reply(`**Done Deleted Messages Has Been Cancel**`).then(ob => {
+          ob.delete(1200)
+          o.delete(1200)
+          msg.delete(1200)
+        })
+        })
+      })
     })
-  }
-});
+    
+    }
+  });
 
 client.login(process.env.BOT_TOKEN);
