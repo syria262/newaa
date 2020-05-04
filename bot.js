@@ -36,7 +36,7 @@ client.on("message", async message => {
       );
     message.channel
       .send(
-        `:eight_pointed_black_star:| **اكتب اسم الروم الي تبي االقيف اواي فيه بدون منشن**`
+        `:eight_pointed_black_star:| **``اكتب اسم الروم الي تبي االقيف اواي فيه ``بدون منشن**`
       )
       .then(msg => {
         message.channel
@@ -77,7 +77,7 @@ client.on("message", async message => {
                     collected.first().delete(); //Narox
                     msg
                       .edit(
-                        ":eight_pointed_black_star:| **اسم القيف اواي **"
+                        ":eight_pointed_black_star:| **اكتب اسم القيف اواي **"
                       )
                       .then(msg => {
                         message.channel
