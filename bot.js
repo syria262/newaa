@@ -1,7 +1,7 @@
 const Discord = require ("discord.js");
 const client = new Discord.Client();
 const moment = require ("moment");
-const prefix = "#";
+const prefix = "!";
 
 client.on("message", async message => {
   //Narox
@@ -36,7 +36,7 @@ client.on("message", async message => {
       );
     message.channel
       .send(
-        `:eight_pointed_black_star:| **Send Name channel For the Giveaway**`
+        `:eight_pointed_black_star:| **اكتب اسم الروم الي تبي االقيف اواي فيه بدون منشن**`
       )
       .then(msg => {
         message.channel
@@ -54,12 +54,12 @@ client.on("message", async message => {
             ); //Narox
             if (!room)
               return message.channel.send(
-                ":heavy_multiplication_x:| **i Found It :(**"
+                ":heavy_multiplication_x:| **لم اجد الروم :(**"
               ); //Narox
             room = collected.first().content;
             collected.first().delete(); //Narox
             msg
-              .edit(":eight_pointed_black_star:| **Time For The Giveaway**")
+              .edit(":eight_pointed_black_star:| **اكتب مدة القيف اواي**")
               .then(msg => {
                 message.channel
                   .awaitMessages(filter, {
@@ -71,13 +71,13 @@ client.on("message", async message => {
                     //Narox
                     if (isNaN(collected.first().content))
                       return message.channel.send(
-                        ":heavy_multiplication_x:| **The Time Be Nambers `` Do the Commend Agin``**"
+                        ":heavy_multiplication_x:| **هذا الرقم ليس موجوداً `` Do the Commend Agin``**"
                       );
                     duration = collected.first().content * 60000;
                     collected.first().delete(); //Narox
                     msg
                       .edit(
-                        ":eight_pointed_black_star:| **Now send The Present **"
+                        ":eight_pointed_black_star:| **اسم القيف اواي **"
                       )
                       .then(msg => {
                         message.channel
