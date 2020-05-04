@@ -95,8 +95,8 @@ client.on("message", async message => {
                             try {
                               let giveEmbed = new Discord.RichEmbed()
                                 .setDescription(
-                                  `**${title}** \nللمشاركة اضغط على 🎉 ! \nTime remaining : ${duration /
-                                    60000} **Minutes**\n **Created at :** ${hours}:${minutes}:${seconds} ${suffix}`
+                                  `**${title}** \nللمشاركة اضغط على 🎉 ! \nمدة القيف اواي : ${duration /
+                                    60000} **Minutes**\n **في الانشاء في :** ${hours}:${minutes}:${seconds} ${suffix}`
                                 )
                                 .setFooter(
                                   message.author.username,
@@ -142,7 +142,7 @@ client.on("message", async message => {
                                     message.guild.channels
                                       .find("name", room)
                                       .send(
-                                        `**الفائز ${gFilter}! لقد فاز في \`${title}\`**`,
+                                        `**الفائز ${gFilter}! لقد فاز بـ \`${title}\`**`,
                                         { embed: {} }
                                       );
                                   }, duration); //Narox
