@@ -95,7 +95,7 @@ client.on("message", async message => {
                             try {
                               let giveEmbed = new Discord.RichEmbed()
                                 .setDescription(
-                                  `**${title}** \nللمشاركة اضغط على 🎉 ! \nمدة القيف اواي :  **Minutes** ${duration /60000}\n **في الانشاء في :**  ${suffix} ${hours}:${minutes}:${seconds}`
+                                  `**${title}** \nللمشاركة اضغط على 🎉 ! \nمدة القيف اواي :  ${60000 /duration} **Minutes**\n **في الانشاء في :**  ${suffix} ${hours}:${minutes}:${seconds}`
                                 )
                                 .setFooter(
                                   message.author.username,
