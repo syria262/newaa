@@ -36,7 +36,7 @@ client.on("message", async message => {
       );
     message.channel
       .send(
-        `:eight_pointed_black_star:| **اكتب اسم الروم الي تبي االقيف اواي فيه بدون منشن**`
+        `:eight_pointed_black_star:| **اكتب اسم الروم الي تبي القيف اواي فيه بدون منشن**`
       )
       .then(msg => {
         message.channel
@@ -71,7 +71,7 @@ client.on("message", async message => {
                     //Narox
                     if (isNaN(collected.first().content))
                       return message.channel.send(
-                        ":heavy_multiplication_x:| **هذا الرقم ليس موجوداً `` Do the Commend Agin``**"
+                        ":heavy_multiplication_x:| **هذا الرقم ليس موجوداً `` عيد كتابة الامر``**"
                       );
                     duration = collected.first().content * 60000;
                     collected.first().delete(); //Narox
@@ -105,7 +105,7 @@ client.on("message", async message => {
                               message.guild.channels
                                 .find("name", room)
                                 .send(
-                                  " :heavy_check_mark: **Giveaway Created** :heavy_check_mark:",
+                                  " :heavy_check_mark: **تم انشاء القيف اواي بنجاح** :heavy_check_mark:",
                                   { embed: giveEmbed }
                                 )
                                 .then(m => {
