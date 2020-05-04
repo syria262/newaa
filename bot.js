@@ -14,7 +14,7 @@ const prefix = "!";
             text = co.first().content
 
               message.channel.send(`تم حفظ اقتراحك الرجاء انتضار الرد من قبل الاداره`)
-                client.channels.get("669859185218813952").send(`${message.author.username}'s sug => ${text}`)
+                client.channels.get("705203120334045194").send(`${message.author.username}'s sug => ${text}`)
 
               })
             }
