@@ -95,7 +95,7 @@ client.on("message", async message => {
                             try {
                               let giveEmbed = new Discord.RichEmbed()
                                 .setDescription(
-                                  `**${title}** \nReact With 🎉 To Enter! \nTime remaining : ${duration /
+                                  `**${title}** \nللمشاركة اضغط على 🎉 ! \nTime remaining : ${duration /
                                     60000} **Minutes**\n **Created at :** ${hours}:${minutes}:${seconds} ${suffix}`
                                 )
                                 .setFooter(
