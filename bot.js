@@ -36,7 +36,7 @@ client.on("message", async message => {
       );
     message.channel
       .send(
-        `:eight_pointed_black_star:| **``اكتب اسم الروم الي تبي االقيف اواي فيه ``بدون منشن**`
+        `:eight_pointed_black_star:| **اكتب اسم الروم الي تبي االقيف اواي فيه بدون منشن**`
       )
       .then(msg => {
         message.channel
