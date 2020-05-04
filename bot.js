@@ -71,7 +71,7 @@ client.on("message", async message => {
                     //Narox
                     if (isNaN(collected.first().content))
                       return message.channel.send(
-                        ":heavy_multiplication_x:| **هذا الرقم ليس موجوداً `` عيد كتابة الامر``**"
+                        ":heavy_multiplication_x:| **هذا الرقم ليس موجوداً `` نفذ الامر مرة اخرى``**"
                       );
                     duration = collected.first().content * 60000;
                     collected.first().delete(); //Narox
@@ -132,17 +132,17 @@ client.on("message", async message => {
                                       )
                                       .setTitle(title) //Narox
                                       .addField(
-                                        "Giveaway Ended !🎉",
+                                        " انتهى القيف اواي !🎉",
                                         `Winners : ${gFilter} \nEnded at :`
                                       )
                                       .setTimestamp();
-                                    m.edit("** 🎉 GIVEAWAY ENDED 🎉**", {
+                                    m.edit("** 🎉 انتهى القيف اواي 🎉**", {
                                       embed: endEmbed
                                     });
                                     message.guild.channels
                                       .find("name", room)
                                       .send(
-                                        `**Congratulations ${gFilter}! You won The \`${title}\`**`,
+                                        `**الفائز ${gFilter}! لقد فاز في \`${title}\`**`,
                                         { embed: {} }
                                       );
                                   }, duration); //Narox
@@ -150,7 +150,7 @@ client.on("message", async message => {
                             } catch (e) {
                               //Narox
                               message.channel.send(
-                                `:heavy_multiplication_x:| **i Don't Have Prem**`
+                                `:heavy_multiplication_x:| **انا لا املك الصلاحيات**`
                               );
                               console.log(e); //Narox
                             }
