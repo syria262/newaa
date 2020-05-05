@@ -13,8 +13,8 @@ client.on('message', message => {
                         let embed = new Discord.RichEmbed()
                         .setAuthor(message.author.username,message.author.avatarURL)
                         .setColor('RANDOM')
-                        .addField('**Time Taken:**',msg + " ms 📶 ")
-                        .addField('**WebSocket:**',api + " ms 📶 ")
+                        .addField('**الوقت المستغرق:**',msg + " ms 📶 ")
+                        .addField('**سرعة اتصال البوت:**',api + " ms 📶 ")
          message.channel.send({embed:embed});
                         }
    });
