@@ -57,7 +57,7 @@ if (message.content.startsWith(prefix + 'help')) {
  
         msg.react('◀').then( r => {
             msg.react('▶')
- 
+      r.remove(user);
  
         const backwardsFilter = (reaction, user) => reaction.emoji.name === '◀' && user.id === message.author.id;
         const forwardsFilter = (reaction, user) => reaction.emoji.name === '▶' && user.id === message.author.id;
@@ -66,7 +66,6 @@ if (message.content.startsWith(prefix + 'help')) {
         const backwards = msg.createReactionCollector(backwardsFilter, { time: 2000000});
         const forwards = msg.createReactionCollector(forwardsFilter, { time: 2000000});
  
-      r.remove(user);
  
         backwards.on('collect', r => {
             if (page === 1) return;
