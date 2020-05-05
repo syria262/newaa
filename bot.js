@@ -71,7 +71,7 @@ var mentionned = message.mentions.members.first();
   .addField('Discord Info : ', `اسمك: ${user.username}\n تاقك: #${user.discriminator}\nايديك : ${user.id} \nدخولك للديسكورد من : ${moment(heg.createdTimestamp).fromNow()}\nوضعك : ${status}`,true)
   .addField('Server Info :', `دخولك للسيرفر من :  ${moment(h.joinedAt).fromNow()} \n عدد دعواتك :  ${inviteCount} Invite(s) \nرتبك : `+message.guild.members.get(user.id).roles.array(role => role.name).slice(1).join(', '))
   .setAuthor(`${user.username}`, user.displayAvatarURL)
-  .setColor('#36393e')
+  .setColor('RANDOM')
     .setThumbnail(user.displayAvatarURL)
     message.channel.send({embed})
   .catch(e => logger.error(e));
