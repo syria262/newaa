@@ -8,7 +8,7 @@ client.on('message', function(msg) {
       let embed = new Discord.RichEmbed()
       .setColor('RANDOM')
       .setThumbnail(msg.guild.iconURL)
-      .setTitle(`Showing Details Of  **${msg.guild.name}*`)
+      .setTitle(`عرض معلومات سيرفر  **${msg.guild.name}*`)
       .addField('🌐** نوع السيرفر**',`[** __${msg.guild.region}__ **]`,true)
       .addField('🏅** __الرتب__**',`[** __${msg.guild.roles.size}__ **]`,true)
       .addField('🔴**__ عدد الاعضاء__**',`[** __${msg.guild.memberCount}__ **]`,true)
