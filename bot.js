@@ -82,6 +82,7 @@ if (message.content.startsWith(prefix + 'help')) {
             embed.setDescription(pages[page-1]);
             embed.setFooter(`Page ${page} of ${pages.length}`);
             msg.edit(embed)
+     r.remove(user);
         })
         })
     })
