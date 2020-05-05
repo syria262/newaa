@@ -9,7 +9,7 @@ client.on('message', message => {
   var argresult = args.join(' ');
        if (message.content.startsWith(prefix + "avatar")) {
            var mentionned = message.mentions.users.first();
-           message.channel.send(`ًںڈ· ${message.author.username} avatar URL : `);
+           message.channel.send(`ً· ${message.author.username} تفضل رابط السيرفر : `);
     var MsH;
       if(mentionned){
           var MsH = mentionned;
