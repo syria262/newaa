@@ -57,7 +57,6 @@ if (message.content.startsWith(prefix + 'help')) {
  
         msg.react('◀').then( r => {
             msg.react('▶')
-      r.remove(user);
  
         const backwardsFilter = (reaction, user) => reaction.emoji.name === '◀' && user.id === message.author.id;
         const forwardsFilter = (reaction, user) => reaction.emoji.name === '▶' && user.id === message.author.id;
