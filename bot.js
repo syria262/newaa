@@ -68,8 +68,8 @@ var mentionned = message.mentions.members.first();
     const embed = new Discord.RichEmbed()
 
   
-  .addField('Discord Info : ', `Name : ${user.username}\n Discriminator: #${user.discriminator}\nID : ${user.id} \nJoinedDiscord : ${moment(heg.createdTimestamp).fromNow()}\nBot :  ${user.bot}\nPlaying : ${game}\nStatus : ${status}`,true)
-  .addField('Server Info :', `LastMessage : ${messag}\nJoined :  ${moment(h.joinedAt).fromNow()} \n Invites :  ${inviteCount} Invite(s) \nRoles : `+message.guild.members.get(user.id).roles.array(role => role.name).slice(1).join(', '))
+  .addField('Discord Info : ', `اسمك: ${user.username}\n تاقك: #${user.discriminator}\nايديك : ${user.id} \nدخولك للديسكورد من : ${moment(heg.createdTimestamp).fromNow()}\nوضعك : ${status}`,true)
+  .addField('Server Info :', `دخولك للسيرفر من :  ${moment(h.joinedAt).fromNow()} \n عدد دعواتك :  ${inviteCount} Invite(s) \nرتبك : `+message.guild.members.get(user.id).roles.array(role => role.name).slice(1).join(', '))
   .setAuthor(`${user.username}`, user.displayAvatarURL)
   .setColor('#36393e')
     .setThumbnail(user.displayAvatarURL)
