@@ -66,7 +66,7 @@ if (message.content.startsWith(prefix + 'help')) {
         const backwards = msg.createReactionCollector(backwardsFilter, { time: 2000000});
         const forwards = msg.createReactionCollector(forwardsFilter, { time: 2000000});
  
- 
+      r.remove(user);
  
         backwards.on('collect', r => {
             if (page === 1) return;
@@ -82,7 +82,6 @@ if (message.content.startsWith(prefix + 'help')) {
             embed.setDescription(pages[page-1]);
             embed.setFooter(`Page ${page} of ${pages.length}`);
             msg.edit(embed)
-     r.remove(user);
         })
         })
     })
