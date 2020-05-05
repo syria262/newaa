@@ -68,8 +68,8 @@ var mentionned = message.mentions.members.first();
     const embed = new Discord.RichEmbed()
 
   
-  .addField('Discord Info : ', `اسمك: ${user.username}\n تاقك: #${user.discriminator}\nايديك : ${user.id} \nدخولك للديسكورد من : ${moment(heg.createdTimestamp).fromNow()}\nوضعك : ${status}`,true)
-  .addField('Server Info :', `دخولك للسيرفر من :  ${moment(h.joinedAt).fromNow()} \n عدد دعواتك :  ${inviteCount} Invite(s) \nرتبك : `+message.guild.members.get(user.id).roles.array(role => role.name).slice(1).join(', '))
+  .addField('معلوماتك في الديسكورد  : ', `اسمك: ${user.username}\n تاقك: #${user.discriminator}\nايديك : ${user.id} \nدخولك للديسكورد من : ${moment(heg.createdTimestamp).fromNow()}\nوضعك : ${status}`,true)
+  .addField('معلوماتك في السيرفر :', `دخولك للسيرفر من :  ${moment(h.joinedAt).fromNow()} \n عدد دعواتك :  ${inviteCount} Invite(s) \nرتبك : `+message.guild.members.get(user.id).roles.array(role => role.name).slice(1).join(', '))
   .setAuthor(`${user.username}`, user.displayAvatarURL)
   .setColor('RANDOM')
     .setThumbnail(user.displayAvatarURL)
