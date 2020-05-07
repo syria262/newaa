@@ -31,9 +31,9 @@ const prefix = "!";
       .setAuthor('Kicked !', user.displayAvatarURL)
       .setColor("RANDOM")
       .setTimestamp()
-      .addField("User:",  `[ + ${user.tag} + ]`)
-      .addField("By:", `[  + ${message.author.tag} +  ]`)
-      .addField("Reason:", `[ + ${reason} +  ]`)
+      .addField("الشخص:",  `[ + ${user.tag} + ]`)
+      .addField("من:", `[  + ${message.author.tag} +  ]`)
+      .addField("السبب:", `[ + ${reason} +  ]`)
       client.channels.get("492583022982463500").send({embed : banembed})
     }
     });
@@ -68,9 +68,9 @@ const prefix = "!";
       .setAuthor(`BANNED!`, user.displayAvatarURL)
       .setColor("RANDOM")
       .setTimestamp()
-      .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
-      .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
-      .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
+      .addField("**الشخص:**",  '**[ ' + `${user.tag}` + ' ]**')
+      .addField("**من:**", '**[ ' + `${message.author.tag}` + ' ]**')
+      .addField("**السبب:**", '**[ ' + `${reason}` + ' ]**')
       message.channel.send({
         embed : banembed
       })
