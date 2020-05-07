@@ -19,9 +19,9 @@ client.on('message', message => {
 		message.channel.send("**قم بكتابة عدد الرسائل المراد حذفها**")
 	}else {
 		message.channel.bulkDelete(messagecount);
-        message.channel.send("**رسالة " + messagecount + " لقد تم حذف**").then(mes => 
+        message.channel.send("** " messagecount " + رسالة   +  لقد تم حذف**").then(mes => 
 		mes.delete(3000)
-		);    
+		);    "
 	 }
    }
   // By Alpha Codes - AboKhalil 26/7/2019
