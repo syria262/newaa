@@ -27,6 +27,7 @@ client.on("message", async message =>{
         15m اسكات ربع ساعه
         30m اسكات نصف ساعه
         1h اسكات ساعه
+        3h اسكات ثلاث ساعات
         1d اسكات يوم كامل
         3d اسكات ثلاث ايام
         1w اسكات اسبوع
@@ -43,6 +44,8 @@ client.on("message", async message =>{
             timefilter = 1800000;
         } else if (timemute = "1h") {
             timefilter = 3600000;
+        } else if (timemute = "3h") {
+            timefilter = 10800000‬;
         } else if (timemute = "1d") {
             timefilter = 86400000;
         } else if (timemute = "3d") {
