@@ -3,81 +3,69 @@ const client = new Discord.Client();
 const moment = require ("moment");
 const prefix = "!";
 
-client.on("message", async message =>{
-// By Alpha Codes - AboKhalil 27/7/2019
-    var args = message.content.split(" ");
-    var command = args[0];
-    let user = message.guild.member(message.mentions.users.first());
-    var timemute = args[2];
-    var reasonmute = message.content.split(" ").slice(3).join(" ");
-    let muteres;
-    let muterole = message.guild.roles.find(`name`, "Muted");
-    if (command === prefix + "mute") {
-        // By Alpha Codes - AboKhalil 27/7/2019
-        if (!message.channel.guild){
-            message.channel.send("هذا الأمر للسيرفرات فقط !");
-        }else if (!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) {
-            message.channel.send("يجب ان تمتلك خاصية `MANAGE_MESSAGES` ");
-        }else if (!user){
-            message.channel.send("تبغاني اسكت الهواء ما اقدر منشن شخص !");
-        } else if (!timemute){
-                    message.channel.send(`**
-        يجب عليك اختيار وقت الإسكات
-        15m اسكات ربع ساعه
-        30m اسكات نصف ساعه
-        1h اسكات ساعه
-        3h اسكاات ثلاث ساعات
-        1d اسكات يوم كامل
-        3d اسكات ثلاث ايام
-        1w اسكات اسبوع
-        1mon اسكات شهر
-        **`);
-        }else if (!reasonmute){
-            message.channel.send(" تطرده بدون سبب ليش ؟ اكتب سبب !");
-        } else {
-            // By Alpha Codes - AboKhalil 27/7/2019
-        if (timemute = "15m") {
-            timefilter = 15000;
-        } else if (timemute = "30m") {
-            timefilter = 30000;
-        } else if (timemute = "1h") {
-            timefilter = 60000;
-        } else if (timemute = "3h") {
-            timefilter = 180000;
-        } else if (timemute = "1d") {
-            timefilter = 1440000;
-        } else if (timemute = "3d") {
-            timefilter = 4320000;
-        } else if (timemute = "1w") {
-            timefilter = 10080000;
-        } else if (timemute = "1mon"){
-            timefilter = 43200000;
-        }
+client.on("message", message => {
+    if (message.author.bot) return;
    
-        muteres = reasonmute;
-        message.channel.send("<@" + user.id + "> **Member Was Muted By :**<@" + message.author.id + ">");
-        message.channel.send("**Reason : **" + muteres);
-        user.addRole(muterole);
-                setTimeout(() => {
- 
-        user.removeRole(muterole);
- 
-        }, timefilter);
-    }
-}// By Alpha Codes - AboKhalil 27/7/2019
-    if (command === prefix + "unmute") {
-        if (!message.channel.guild){
-            message.channel.send("هذا الأمر للسيرفرات فقط !");
-        } else if (!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) {
-            message.channel.send("يجب ان تمتلك خاصية `MANAGE_MESSAGES` ");
-        }else if (!user){
-            message.channel.send("تبغاني اخلي الهواء يتكلم ما اقدر منشن شخص !");
-        } else  {
+    let command = message.content.split(" ")[0];
    
-        message.channel.send("<@" + user.id + "> ** Was UnMuted By :**<@" + message.author.id + ">");
-        user.removeRole(muterole);
+    if (command === "mute")  {
+          if (!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send("").catch(console.error);
+    let user = message.mentions.users.first();
+    let muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Muted');
+    if (!muteRole) return message.channel.send("** please create role 'Muted' **").catch(console.error);
+    if (message.mentions.users.size < 1) return message.channel.send(`🙄 - I can't find this member`).catch(console.error);
+   
+    const embed = new Discord.RichEmbed()
+      .setColor(0x00AE86)
+      .setTimestamp()
+      .addField('Usage:', 'mute')
+      .addField('Muted:', `${user.username}#${user.discriminator} (${user.id})`)
+      .addField('By:', `${message.author.username}#${message.author.discriminator}`)
+     
+     if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return .catch(console.error);
+   
+    if (message.guild.member(user).roles.has(muteRole.id)) {
+  return message.channel.send(`✅** ${user.username}  muted from the text! **🤐`).catch(console.error);
+  } else {
+      message.guild.member(user).addRole(muteRole).then(() => {
+  return message.channel.send(`✅** ${user.username}  muted from the text! **🤐`).catch(console.error);
+  });
     }
-  } // By Alpha Codes - AboKhalil 27/7/2019
+ 
+  };
+ 
+});
+
+client.on("message", message => {
+    if (message.author.bot) return;
+   
+    let command = message.content.split(" ")[0];
+   
+    if (command === "unmute")  {
+          if (!message.member.hasPermission('MANAGE_ROLES')) return .catch(console.error);
+    let user = message.mentions.users.first();
+    let muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Muted');
+    if (!muteRole) return message.reply("** You Do Not have 'Muted' Role **").catch(console.error);
+    if (message.mentions.users.size < 1) return message.channel.send(`🙄 - I can't find this member`).catch(console.error);
+    const embed = new Discord.RichEmbed()
+      .setColor(0x00AE86)
+      .setTimestamp()
+      .addField('Usage:', 'unmute')
+      .addField('Unmuted:', `${user.username}#${user.discriminator} (${user.id})`)
+      .addField('By:', `${message.author.username}#${message.author.discriminator}`)
+ 
+    if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('** No Manage Roles Permission **').catch(console.error);
+ 
+    if (message.guild.member(user).removeRole(muteRole.id)) {
+  return message.channel.send(`✅ ${user.username}  unmuted ! `).catch(console.error);
+  } else {
+      message.guild.member(user).removeRole(muteRole).then(() => {
+  return message.channel.send(`✅ ${user.username}  unmuted ! `).catch(console.error);
+  });
+    }
+ 
+  };
+ 
 });
 
 client.login(process.env.BOT_TOKEN);
