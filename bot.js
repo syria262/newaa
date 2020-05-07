@@ -8,7 +8,7 @@ client.on("message", message => {
             if (message.content.startsWith(prefix + "clear")) {
  if (!args[1]) {
                                 let x5bz1 = new Discord.RichEmbed()
-                                .setDescription("#clear <number>")
+                                .setDescription("#clear <العدد>")
                                 .setColor("#0000FF")
                                 message.channel.sendEmbed(x5bz1);
                             } else {
@@ -18,7 +18,7 @@ client.on("message", message => {
                             message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
                             let x5bz2 = new Discord.RichEmbed()
                                                             .setColor("#008000")
-                                .setDescription(":white_check_mark: | Delete " + args[1] + " Message!")
+                                .setDescription(":white_check_mark: | تم مسح " + args[1] + " من الرسائل!")
                                                                                         message.delete("..");
                                 message.channel.sendEmbed(x5bz2);
                             }
