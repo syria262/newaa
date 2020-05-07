@@ -3,20 +3,27 @@ const client = new Discord.Client();
 const moment = require ("moment");
 const prefix = "!";
 
-client.on('message', message => {  
-    if (message.author.bot) return; 
-    if (message.content.startsWith(prefix + 'clear')) { 
-    if(!message.channel.guild) return message.reply(`** This Command For Servers Only**`); 
-     if(!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send(`** You don't have Premissions!**`);
-     if(!message.guild.member(client.user).hasPermission('MANAGE_GUILD')) return message.channel.send(`**I don't have Permission!**`);
-    let args = message.content.split(" ").slice(1)
-    let messagecount = parseInt(args);
-    if (args > 100) return message.reply(`** The number can't be more than **100** .**`).then(messages => messages.delete(5000))
-    if(!messagecount) args = '100';
-    message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages)).then(msgs => {
-    message.channel.send.then(messages => messages.delete(5000));
-    })
-  }
-});
+client.on('message', message => {
+  if (message.author.bot) return;
 
+  let args = message.content.split(" ");
+  
+  let command = args[0];
+  
+  let messagecount = args[1];
+  
+    if(command == prefix + "clear") {
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) {
+		message.channel.send("يجب ان تمتلك خاصية `MANAGE_MESSAGES` ")
+	} else if (!messagecount) {
+		message.channel.send("**قم بإدراج عدد الرسائل المراد حذفها**")
+	}else {
+		message.channel.bulkDelete(messagecount);
+        message.channel.send("**رسالة `" + messagecount + "` لقد تم حذف**").then(mes => 
+		mes.delete(3000)
+		);    
+	 }
+   }
+  // By Alpha Codes - AboKhalil 26/7/2019
+});
 client.login(process.env.BOT_TOKEN);
