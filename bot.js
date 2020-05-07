@@ -2,6 +2,7 @@ const Discord = require ("discord.js");
 const client = new Discord.Client();
 const moment = require ("moment");
 const prefix = "!";
+const translate = require('google-translate-api');
 
 client.on("message", message => {
   if (message.content.startsWith(prefix + "trans")) {
