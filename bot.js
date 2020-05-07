@@ -3,7 +3,6 @@ const client = new Discord.Client();
 const moment = require ("moment");
 const prefix = "!";
 
-
 client.on("message", async message =>{
 // By Alpha Codes - AboKhalil 27/7/2019
     var args = message.content.split(" ");
@@ -27,33 +26,32 @@ client.on("message", async message =>{
         15m اسكات ربع ساعه
         30m اسكات نصف ساعه
         1h اسكات ساعه
-        3h اسكات ثلاث ساعات
+        3h اسكاات ثلاث ساعات
         1d اسكات يوم كامل
         3d اسكات ثلاث ايام
         1w اسكات اسبوع
         1mon اسكات شهر
         **`);
         }else if (!reasonmute){
-            message.channel.send("تطرده بدون سبب ليش ؟ اكتب سبب !");
+            message.channel.send(" تطرده بدون سبب ليش ؟ اكتب سبب !");
         } else {
             // By Alpha Codes - AboKhalil 27/7/2019
-          var timefilter;
         if (timemute = "15m") {
-            timefilter = 900000;
+            timefilter = 15000;
         } else if (timemute = "30m") {
-            timefilter = 1800000;
+            timefilter = 30000;
         } else if (timemute = "1h") {
-            timefilter = 3600000;
+            timefilter = 60000;
         } else if (timemute = "3h") {
-            timefilter = 10800000‬;
+            timefilter = 180000;
         } else if (timemute = "1d") {
-            timefilter = 86400000;
+            timefilter = 1440000;
         } else if (timemute = "3d") {
-            timefilter = 259200000;
+            timefilter = 4320000;
         } else if (timemute = "1w") {
-            timefilter = ‭604800000‬;
+            timefilter = 10080000;
         } else if (timemute = "1mon"){
-            timefilter = 2592000000‬;
+            timefilter = 43200000;
         }
    
         muteres = reasonmute;
@@ -73,7 +71,7 @@ client.on("message", async message =>{
         } else if (!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) {
             message.channel.send("يجب ان تمتلك خاصية `MANAGE_MESSAGES` ");
         }else if (!user){
-            message.channel.send("تبغاني اخلي الهواء يتكلم ما اقدر منشن شخص  !");
+            message.channel.send("تبغاني اخلي الهواء يتكلم ما اقدر منشن شخص !");
         } else  {
    
         message.channel.send("<@" + user.id + "> ** Was UnMuted By :**<@" + message.author.id + ">");
