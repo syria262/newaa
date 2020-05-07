@@ -8,7 +8,7 @@ client.on('message', message => {
     if (message.content === "!mc") {
                         if(!message.channel.guild) return message.reply(' هذا الامر فقط للسيرفرات !!');
 
-if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' [user] تبي ميوت صح ؟  ');
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('  تبي ميوت صح ؟  ');
            message.channel.overwritePermissions(message.guild.id, {
          SEND_MESSAGES: false
 
@@ -19,7 +19,7 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(' [use
 if (message.content === "!unmc") {
     if(!message.channel.guild) return message.reply(' هذا الامر فقط للسيرفرات !!');
 
-if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('ليس لديك صلاحيات');
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('تبي ميوت صح ؟');
            message.channel.overwritePermissions(message.guild.id, {
          SEND_MESSAGES: true
 
