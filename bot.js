@@ -20,7 +20,7 @@ client.on("message", async message =>{
         }else if (!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) {
             message.channel.send("يجب ان تمتلك خاصية `MANAGE_MESSAGES` ");
         }else if (!user){
-            message.channel.send("يجب عليك اختيار شخص اولا !");
+            message.channel.send("تبغاني اسكت الهواء ما اقدر منشن شخص !");
         } else if (!timemute){
                     message.channel.send(`**
         يجب عليك اختيار وقت الإسكات
@@ -34,7 +34,7 @@ client.on("message", async message =>{
         1mon اسكات شهر
         **`);
         }else if (!reasonmute){
-            message.channel.send("لم تقم بكتابة سبب !");
+            message.channel.send("تطرده بدون سبب ليش ؟ اكتب سبب !");
         } else {
             // By Alpha Codes - AboKhalil 27/7/2019
           var timefilter;
@@ -73,7 +73,7 @@ client.on("message", async message =>{
         } else if (!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) {
             message.channel.send("يجب ان تمتلك خاصية `MANAGE_MESSAGES` ");
         }else if (!user){
-            message.channel.send("يجب عليك اختيار شخص اولا !");
+            message.channel.send("تبغاني اخلي الهواء يتكلم ما اقدر منشن شخص  !");
         } else  {
    
         message.channel.send("<@" + user.id + "> ** Was UnMuted By :**<@" + message.author.id + ">");
