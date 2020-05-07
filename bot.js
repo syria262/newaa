@@ -3,27 +3,26 @@ const client = new Discord.Client();
 const moment = require ("moment");
 const prefix = "!";
 
-client.on('message', message => {
-  if (message.author.bot) return;
-
-  let args = message.content.split(" ");
-  
-  let command = args[0];
-  
-  let messagecount = args[1];
-  
-    if(command == prefix + "clear") {
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) {
-		message.channel.send("يجب ان تمتلك خاصية `MANAGE_MESSAGES` ")
-	} else if (!messagecount) {
-		message.channel.send("**قم بكتابة عدد الرسائل المراد حذفها**")
-	}else {
-		message.channel.bulkDelete(messagecount);
-        message.channel.send("** " messagecount " + رسالة   +  لقد تم حذف**").then(mes => 
-		mes.delete(3000)
-		);    "
-	 }
-   }
-  // By Alpha Codes - AboKhalil 26/7/2019
+client.on("message", message => {
+            var args = message.content.substring(prefix.length).split(" ");
+            if (message.content.startsWith(prefix + "clear")) {
+ if (!args[1]) {
+                                let x5bz1 = new Discord.RichEmbed()
+                                .setDescription("#clear <number>")
+                                .setColor("#0000FF")
+                                message.channel.sendEmbed(x5bz1);
+                            } else {
+                            let messagecount = parseInt(args[1]);
+                            message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+                                                          message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+                            message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
+                            let x5bz2 = new Discord.RichEmbed()
+                                                            .setColor("#008000")
+                                .setDescription(":white_check_mark: | Delete " + args[1] + " Message!")
+                                                                                        message.delete("..");
+                                message.channel.sendEmbed(x5bz2);
+                            }
+                          }
 });
+
 client.login(process.env.BOT_TOKEN);
