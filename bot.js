@@ -19,7 +19,7 @@ client.on("message", message => {
                             let x5bz2 = new Discord.RichEmbed()
                                                             .setColor("#008000")
                                 .setDescription(":white_check_mark: | تم مسح " + args[1] + " من الرسائل!")
-                                                                                        message.delete("..");
+                                                                                        message.delete("1000");
                                 message.channel.sendEmbed(x5bz2);
                             }
                           }
