@@ -42,7 +42,7 @@ client.on("message", message => {
     let command = message.content.split(" ")[0];
    
     if (command === "unmute")  {
-          if (!message.member.hasPermission('MANAGE_ROLES')) return .catch(console.error);
+          if (!message.member.hasPermission('MANAGE_ROLES')) return 
     let user = message.mentions.users.first();
     let muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Muted');
     if (!muteRole) return message.reply("** You Do Not have 'Muted' Role **").catch(console.error);
