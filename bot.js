@@ -14,7 +14,7 @@ client.on('message', message => {
     if (args > 100) return message.reply(`** The number can't be more than **100** .**`).then(messages => messages.delete(5000))
     if(!messagecount) args = '100';
     message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages)).then(msgs => {
-    message.channel.send(`** Done , Deleted `${msgs.size}` messages.**`).then(messages => messages.delete(5000));
+    message.channel.send.then(messages => messages.delete(5000));
     })
   }
 });
