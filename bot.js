@@ -2,46 +2,51 @@ const Discord = require ("discord.js");
 const client = new Discord.Client();
 const moment = require ("moment");
 const prefix = "!";
-const translate = require('google-translate-api');
 
-client.on("message", message => {
-  if (message.content.startsWith(prefix + "trans")) {
-    let args = message.content.split(" ").slice(1);
-    if (!args[0]) {
-      const embed = new Discord.RichEmbed()
-        .setColor("FFFFFF")
-        .setDescription(
-          "**ترجمة الكتابة.**استعمل: `*translate <الكلمة لتبي> <االغة>`"
-        );
+client.on('message', message => {
+	var prefix = "?";
+   if(!message.channel.guild) return;
+if(message.content.startsWith(prefix + 'clear')) {
+if(!message.channel.guild) return message.channel.send('**This Command is Just For Servers**').then(m => m.delete(5000));
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return      message.channel.send('**You Do not have permission** `MANAGE_MESSAGES`' );
+let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
+let request = `Requested By ${message.author.username}`;
+message.channel.send(`**Are You sure you want to clear the chat?**`).then(msg => {
+msg.react('✅')
+.then(() => msg.react('❌'))
+.then(() =>msg.react('✅'))
 
-      return message.channel.send(embed);
-    } else {
-      if (args.length === undefined) {
-        return message.channel.send(
-          "**ترجمة الكتابة.**استعمل: `*translate <الكلمة لتبي> <االغة>`"
-        );
-      } else {
-        let transArg = args[0].toLowerCase();
+let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
 
-        args = args.join(" ").slice(1);
-        let translation;
+let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
+let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
+reaction1.on("collect", r => {
+message.channel.send(`Chat will delete`).then(m => m.delete(5000));
+var msg;
+        msg = parseInt();
 
-        if (!Langs.includes(transArg))
-          return message.channel.send(`**Language not found.**`);
-        args = args.slice(transArg.length);
+      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
+      message.channel.sendMessage("", {embed: {
+        title: "`` Chat Deleted ``",
+        color: 0x06DF00,
+        footer: {
 
-        translate(args, {
-          to: transArg
-        }).then(res => {
-          const embed = new Discord.RichEmbed()
-            .setAuthor("Translator", client.user.displayAvatarURL)
-            .addField(`Input`, `\`\`\`${args}\`\`\``)
-            .setColor("#42f4c8")
-            .addField(`Output`, `\`\`\`${res.text}\`\`\``);
-          return message.channel.send(embed);
-        });
-      }
-    }
+        }
+      }}).then(msg => {msg.delete(3000)});
+
+})
+reaction2.on("collect", r => {
+message.channel.send(`**Chat deletion cancelled**`).then(m => m.delete(5000));
+msg.delete();
+})
+})
+}
+});
+
+client.on('message', MEOW => {
+  if(MEOW.content.startsWith("!roll")){
+    MEOW.channel.send(Math.floor(Math.random() * 100))
   }
 });
 
