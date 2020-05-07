@@ -16,10 +16,10 @@ client.on('message', message => {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) {
 		message.channel.send("يجب ان تمتلك خاصية `MANAGE_MESSAGES` ")
 	} else if (!messagecount) {
-		message.channel.send("**قم بإدراج عدد الرسائل المراد حذفها**")
+		message.channel.send("**قم بكتابة عدد الرسائل المراد حذفها**")
 	}else {
 		message.channel.bulkDelete(messagecount);
-        message.channel.send("**رسالة `" + messagecount + "` لقد تم حذف**").then(mes => 
+        message.channel.send("**رسالة " + messagecount + " لقد تم حذف**").then(mes => 
 		mes.delete(3000)
 		);    
 	 }
