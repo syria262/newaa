@@ -22,7 +22,7 @@ client.on("message", message => {
       .addField('Muted:', `${user.username}#${user.discriminator} (${user.id})`)
       .addField('By:', `${message.author.username}#${message.author.discriminator}`)
      
-     if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return .catch(console.error);
+     if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return catch(console.error);
    
     if (message.guild.member(user).roles.has(muteRole.id)) {
   return message.channel.send(`✅** ${user.username}  muted from the text! **🤐`).catch(console.error);
