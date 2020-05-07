@@ -19,11 +19,4 @@ client.on('message', message => {
   }
 });
 
-client.on('message', MEOW => {
-  if(MEOW.content.startsWith("!roll")){
-    MEOW.channel.send(Math.floor(Math.random))
-  }
-});
-
-
 client.login(process.env.BOT_TOKEN);
