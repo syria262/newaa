@@ -4,7 +4,6 @@ const moment = require ("moment");
 const prefix = "!";
 
  client.on('message', message => {
-    const prefix = "!";
       if (message.author.kick) return;
       if (!message.content.startsWith(prefix)) return;
      
@@ -40,7 +39,6 @@ const prefix = "!";
     });
 
     client.on('message', message => {
-            const prefix = "!";
      if (message.author.x5bz) return;
       if (!message.content.startsWith(prefix)) return;
      
