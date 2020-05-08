@@ -766,7 +766,7 @@ client.on("message", async message => {
       if (message.mentions.users.size < 1) return message.reply("**لازم تمنشن شخص**");
       if(!reason) return message.reply ("**اكتب سبب الطرد**");
       if (!message.guild.member(user)
-      .bannable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه عالي**");
+      .bannable) return message.reply("**لايمكنني طرد شخص اعلى من رتبتي يرجه اعطاء البوت رتبه اعلى**");
      
       message.guild.member(user).ban(7, user);
      
@@ -782,5 +782,64 @@ client.on("message", async message => {
       })
     }
     });
+
+ client.on('message', message => {
+    const prefix = "!";
+      if (message.author.kick) return;
+      if (!message.content.startsWith(prefix)) return;
+     
+      let command = message.content.split(" ")[0];
+      command = command.slice(prefix.length);
+     
+      let args = message.content.split(" ").slice(1);
+     
+      if (command == "kick") {
+                   if(!message.channel.guild) return;
+             
+      if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("You Don't Have KICK_MEMBERS Permission").then(msg => msg.delete(5000));
+      if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("I Don't Have KICK_Members Permission");
+      let user = message.mentions.users.first();
+      let reason = message.content.split(" ").slice(2).join(" ");
+     
+      if (message.mentions.users.size < 1) return message.reply("لازم تمنشن شخص");
+      if(!reason) return message.reply ("اكتب سبب الطرد");
+      if (!message.guild.member(user)
+      .bannable) return message.reply("لايمكنني طرد شخص اعلى من رتبتي");
+     
+      message.guild.member(user).kick(7, user);
+     
+      const banembed = new Discord.RichEmbed()
+      .setAuthor('Kicked !', user.displayAvatarURL)
+      .setColor("RANDOM")
+      .setTimestamp()
+      .addField("User:",  `[ + ${user.tag} + ]`)
+      .addField("By:", `[  + ${message.author.tag} +  ]`)
+      .addField("Reason:", `[ + ${reason} +  ]`)
+      client.channels.get("492583022982463500").send({embed : banembed})
+    }
+    });
+
+client.on('message', message => {
+   let embed = new Discord.RichEmbed()
+
+    let args = message.content.split(' ').slice(1).join(' ');
+     if(!message.channel.guild) return;
+if(message.content.split(' ')[0] == '!bc') {
+         message.react("✔️")
+          let embed = new Discord.RichEmbed()
+    .setColor("#FF00FF")
+    .setThumbnail(message.author.avatarURL)   
+                                      .addField('تم الارسال بواسطة :', "<@" + message.author.id + ">")
+                 message.channel.sendEmbed(embed);
+        message.guild.members.forEach(m => {
+            var bc = new Discord.RichEmbed()
+.addField('**● Sender  :**', `*** → ${message.author.username}#${message.author.discriminator}***`)
+            .addField('***● Server  :***', `*** → ${message.guild.name}***`)               
+    .setColor('#ff0000')
+                 .addField('ّ', args)
+            m.send(``,{embed: bc});
+        });
+    }
+})
 
 client.login(process.env.BOT_TOKEN);
