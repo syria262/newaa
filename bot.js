@@ -798,8 +798,8 @@ if(message.content.split(' ')[0] == '!bc') {
                  message.channel.sendEmbed(embed);
         message.guild.members.forEach(m => {
             var bc = new Discord.RichEmbed()
-.addField('**● Sender  :**', `*** → ${message.author.username}#${message.author.discriminator}***`)
-            .addField('***● Server  :***', `*** → ${message.guild.name}***`)               
+.addField('**● المرسل  :**', `*** → ${message.author.username}#${message.author.discriminator}***`)
+            .addField('***● السيرفر  :***', `*** → ${message.guild.name}***`)               
     .setColor('#ff0000')
                  .addField('ّ', args)
             m.send(``,{embed: bc});
