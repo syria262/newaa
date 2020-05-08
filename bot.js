@@ -4,7 +4,7 @@ const moment = require ("moment");
 const prefix = "!";
 
 client.on("message", message => {
-if (message.content.startsWith("!rules")) {
+if (message.content.startsWith("!ranks")) {
 let auto = new Discord.RichEmbed()
 .setDescription(`
 في خمسة رتب في السيرفر 
