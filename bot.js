@@ -9,11 +9,11 @@ client.on("message", message => {
     let command = message.content.split(" ")[0];
    
     if (command === "unmute")  {
-          if (!message.member.hasPermission('MANAGE_ROLES')) return  
+          if (!message.member.hasPermission('MANAGE_ROLES')) return 
     let user = message.mentions.users.first();
     let muteRole = client.guilds.get(message.guild.id).roles.find('name', 'Muted');
-    if (!muteRole) return message.reply("** You Do Not have 'Muted' Role **").catch(console.error);
-    if (message.mentions.users.size < 1) return message.channel.send(`🙄 - I can't find this member`).catch(console.error);
+    if (!muteRole) return message.reply("** You Do Not have 'Muted' Role **")
+    if (message.mentions.users.size < 1) return message.channel.send(`🙄 - I can't find this member`)
     const embed = new Discord.RichEmbed()
       .setColor(0x00AE86)
       .setTimestamp()
@@ -21,20 +21,19 @@ client.on("message", message => {
       .addField('Unmuted:', `${user.username}#${user.discriminator} (${user.id})`)
       .addField('By:', `${message.author.username}#${message.author.discriminator}`)
  
-    if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('** No Manage Roles Permission **').catch(console.error);
+    if (!message.guild.member(client.user).hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('** No Manage Roles Permission **')
  
     if (message.guild.member(user).removeRole(muteRole.id)) {
-  return message.channel.send(`✅ ${user.username}  unmuted ! `).catch(console.error);
+  return message.channel.send(`✅ ${user.username}  unmuted ! `)
   } else {
       message.guild.member(user).removeRole(muteRole).then(() => {
-  return message.channel.send(`✅ ${user.username}  unmuted ! `).catch(console.error);
+  return message.channel.send(`✅ ${user.username}  unmuted ! `)
   });
     }
  
   };
  
 });
-
 client.on("message", message => {
     if (message.author.bot) return;
    
