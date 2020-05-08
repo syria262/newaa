@@ -815,7 +815,7 @@ client.on("message", async message => {
       .addField("User:",  `[ + ${user.tag} + ]`)
       .addField("By:", `[  + ${message.author.tag} +  ]`)
       .addField("Reason:", `[ + ${reason} +  ]`)
-      client.channels.get("492583022982463500").send({embed : banembed})
+      client.channels.get("706275089628528686").send({embed : banembed})
     }
     });
 
@@ -841,5 +841,7 @@ if(message.content.split(' ')[0] == '!bc') {
         });
     }
 })
+
+
 
 client.login(process.env.BOT_TOKEN);
