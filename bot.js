@@ -5,7 +5,7 @@ const prefix = "!";
 
 client.on("message", message => {
     if (msg.content === '!ip') {
-if auto = new Discord.RichEmbed()
+if = new Discord.RichEmbed()
 .setDescription(`تفضل`)
 message.channel.send("تفضل1")
 
