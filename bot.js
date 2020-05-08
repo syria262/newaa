@@ -840,7 +840,7 @@ var msg;
 
 })
 reaction2.on("collect", r => {
-message.channel.send(`**Chat deletion cancelled**`).then(m => m.delete(5000));
+message.channel.send(`**Chat deletion cancelled**`).then(m => m.delete(100));
 msg.delete();
 })
 })
