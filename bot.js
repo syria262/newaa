@@ -6,7 +6,8 @@ const prefix = "!";
 client.on("message", message => {
 if (message.content.startsWith("!rules")) {
 let auto = new Discord.RichEmbed()
-.setDescription(في خمسة رتب في السيرفر : 
+.setDescription(
+في خمسة رتب في السيرفر 
  لمعرفة سعر وخواص الرتب اكتب 
 GOLD :  !GOLDshow
 FIRE :  !FIREshow
