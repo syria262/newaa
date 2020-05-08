@@ -6,7 +6,7 @@ const prefix = "!";
 client.on("message", message => {
 if (message.content.startsWith("!rules")) {
 let auto = new Discord.RichEmbed()
-.setDescription(
+.setDescription(`
 في خمسة رتب في السيرفر 
  لمعرفة سعر وخواص الرتب اكتب 
 GOLD :  !GOLDshow
@@ -14,7 +14,7 @@ FIRE :  !FIREshow
 VIP :  !VIPshow
 D-FIRE :  !D-FIREshow
 D-VIP :  !D-VIPshow
-)
+`)
 .setColor("FFFF00")
 message.channel.send(auto)
 }})
