@@ -4,10 +4,10 @@ const moment = require ("moment");
 const prefix = "!";
 
 client.on("message", message => {
-if (message.content.startsWith("!ip")
+    if (msg.content === '!ip') {
 let auto = new Discord.RichEmbed()
 .setDescription(`تفضل`)
 message.channel.send("تفضل1")
 
-
+  
 client.login(process.env.BOT_TOKEN);
