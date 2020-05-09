@@ -845,7 +845,7 @@ await typesMSG.delete();
 message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
   m.send(`${args}n ${m}`); //OMAR#6356
   })
-  message.channel.send(`${message.guild.members.filter(m => m.presence.status !== 'online').size}` : عدد الاعضاء المستلمين`); 
+  message.channel.send(`${message.guild.members.filter(m => m.presence.status !== 'online') ` : عدد الاعضاء المستلمين`); 
 });
  //OMAR#6356
 f4.on('collect', async r => {
