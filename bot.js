@@ -770,8 +770,8 @@ client.on("message", async message => {
 client.on("message", async message => { //OMAR#6356
   if(message.content.startsWith(prefix + "bc")) { //OMAR#6356
     const args = message.content.split(" ").slice(1).join(" "); //OMAR#6356
-    if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('لا تمتلك الصلاحيات الكافية');
-    if(!args) return message.channel.send('يجب عليك  الرسالة'); //OMAR#6356
+    if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('تبي ميوت صح ؟؟');
+    if(!args) return message.channel.send('ما اقدر ارسلهم هوا'); //OMAR#6356
  //OMAR#6356
       let help = new Discord.RichEmbed() //OMAR#6356
           .setColor("RANDOM") //OMAR#6356
