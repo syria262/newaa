@@ -767,29 +767,96 @@ client.on("message", async message => {
     });
 
 
-client.on('message', message => {
-   let embed = new Discord.RichEmbed()
+client.on("message", async message => { //OMAR#6356
+  if(message.content.startsWith(prefix + "bc")) { //OMAR#6356
+    const args = message.content.split(" ").slice(1).join(" "); //OMAR#6356
+    if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('لا تمتلك الصلاحيات الكافية');
+    if(!args) return message.channel.send('يجب عليك  الرسالة'); //OMAR#6356
+ //OMAR#6356
+      let help = new Discord.RichEmbed() //OMAR#6356
+          .setColor("RANDOM") //OMAR#6356
+          .setThumbnail(message.author.avatarURL) //OMAR#6356
+          .setDescription(`**انوع البرودكاست
 
-    let args = message.content.split(' ').slice(1).join(' ');
-     if(!message.channel.guild) return;
-if(message.content.split(' ')[0] == '!bc') {
-         message.react("✔️")
-          let embed = new Discord.RichEmbed()
-    .setColor("#FF00FF")
-    .setThumbnail(message.author.avatarURL)   
-                                      .addField('تم الارسال بواسطة :', "<@" + message.author.id + ">")
-                 message.channel.sendEmbed(embed);
-        message.guild.members.forEach(m => {
-            var bc = new Discord.RichEmbed()
-.addField('**● المرسل  :**', `*** → ${message.author.username}#${message.author.discriminator}***`)
-            .addField('***● السيرفر  :***', `*** → ${message.guild.name}***`)               
-    .setColor('#ff0000')
-                 .addField('ّ', args)
-            m.send(``,{embed: bc});
-        });
-    }
-})
+          1- للكل بدون امبيد
+          2- للكل بامبيد
+          3- اونلاين بدون امبيد
+          4- للالغاء
+          **`);
+         let typesMSG = await  message.channel.sendEmbed(help)
+         var numbers = ["u0030u20E3", "u0031u20E3", "u0032u20E3", "u0033u20E3", "u0034u20E3", "u0035u20E3", "u0036u20E3", "u0037u20E3", "u0038u20E3", "u0039u20E3"]
 
+
+       let r1 = await typesMSG.react(numbers[1]); //OMAR#6356
+       let r2 = await typesMSG.react(numbers[2]); //OMAR#6356
+       let r3 = await typesMSG.react(numbers[3]); //OMAR#6356
+       let r4 = await typesMSG.react("❌"); //OMAR#6356
+
+
+
+
+ let filter1 = (reaction, user) => reaction.emoji.name == numbers[1] && user.id == message.author.id;
+ let filter2 = (reaction, user) => reaction.emoji.name == numbers[2] && user.id == message.author.id;
+ let filter3 = (reaction, user) => reaction.emoji.name == numbers[3] && user.id == message.author.id;
+ let filter4 = (reaction, user) => reaction.emoji.name == "❌" && user.id == message.author.id;
+ if (!typesMSG) return;
+
+ let f1 = typesMSG.createReactionCollector(filter1, { //OMAR#6356
+     time: 18000 //OMAR#6356
+ });
+ let f2 = typesMSG.createReactionCollector(filter2, { //OMAR#6356
+     time: 18000
+ }); //OMAR#6356
+ let f3 = typesMSG.createReactionCollector(filter3, { //OMAR#6356
+     time: 18000
+ });
+ let f4 = typesMSG.createReactionCollector(filter4, { //OMAR#6356
+     time: 18000
+ });
+
+
+  
+
+f1.on('collect', async r => { //OMAR#6356
+  await typesMSG.delete();
+  message.guild.members.filter(m => m.presence.status !== 'all').forEach(m => {
+    m.send(`${args}n ${m}`);
+    })
+    message.channel.send(`تم الارسال`); 
+  
+}); //OMAR#6356
+
+f2.on('collect', async r => {
+await typesMSG.delete();
+message.guild.members.forEach(m => {
+  var bc = new Discord.RichEmbed()
+  .setThumbnail(message.author.avatarURL)
+  .addField('# | المرسل', message.author) //OMAR#6356
+  .addField('# | الرسالة ', args)
+  .addField('# | السيرفر', message.guild.name) //OMAR#6356
+  .setColor('RANDOM')
+  m.sendMessage(bc)
+});
+message.channel.send(`تم الارسال`)
+}); //OMAR#6356
+
+f3.on('collect', async r => {
+await typesMSG.delete();
+message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
+  m.send(`${args}n ${m}`); //OMAR#6356
+  })
+  message.channel.send(``${message.guild.members.filter(m => m.presence.status !== 'online').size}` : عدد الاعضاء المستلمين`); 
+});
+ //OMAR#6356
+f4.on('collect', async r => {
+await typesMSG.delete();
+message.channel.send('تم الالغاء بنجاح') //OMAR#6356
+}); //OMAR#6356
+
+
+  } //OMAR#6356
+
+}); //OMAR#6356
 client.on('message', message => {  
     if (message.author.bot) return; 
     if (message.content.startsWith(prefix + 'clear')) { 
