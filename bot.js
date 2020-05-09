@@ -272,22 +272,6 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('تب�
 
 });
 
-client.on('message', message => {
-if (message.content.startsWith(prefix+"ct")) {
-    var args = message.content.split(" ").slice(1);
-    var argrst = args.join(' ');
-                message.guild.createChannel(`${argrst}`, 'text')
-      }
-});
-
-client.on('message', message => {
-if (message.content.startsWith(prefix+"cv")) {
-    var args = message.content.split(" ").slice(1);
-    var argrst = args.join(' ');
-                message.guild.createChannel(`${argrst}`,'voice')
-          
-        }
-});
 
 const Za7f = [
     "**صورة وجهك او رجلك او خشمك او يدك**.",
