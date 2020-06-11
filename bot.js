@@ -22,6 +22,8 @@ client.on("guildMemberAdd", member => {
 
     .addField(" الـسيرفر", `${member.guild.name}`, true)
 
+      .addField(" الـسيرفر", `${invited.by}`, true)
+
     .setFooter(`${member.guild.name}`)
     .setTimestamp();
 
