@@ -22,7 +22,7 @@ client.on("guildMemberAdd", member => {
 
     .addField(" الـسيرفر", `${member.guild.name}`, true)
 
-      .addField(" الـسيرفر", `${invited.by}`, true)
+      .addField(" دعاه", `<@${inviter.id}>`, true)
 
     .setFooter(`${member.guild.name}`)
     .setTimestamp();
