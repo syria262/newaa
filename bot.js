@@ -52,6 +52,24 @@ client.on("guildMemberRemove", member => {
   channel.send({ embed: embed });
 });
 
+client.on("message", light => {
+  let devs = "669859185218813952";
+  let args = light.content
+    .split(" ")
+    .slice(1)
+    .join(" ");
+  if (!devs.includes(light.author.id)) return;
+  if (!light.channel.guild || light.author.bot) return;
+  if (!args) return;
+  if (light.content.startsWith(prefix + `setname`)) {
+    client.user.setUsername(args);
+    light.channel.send(`Changed To ,  ${args}`);
+  }
+  if (light.content.startsWith(prefix + `setavatar`)) {
+    client.user.setAvatar(args);
+    light.channel.send(`Done.`);
+  }
+});
 
 
 client.login(process.env.BOT_TOKEN)
